@@ -1,32 +1,31 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    
+    <MenuInicio v-if="!usuarioAutenticado"/>
+    <MenuAdmin v-if="usuarioAutenticado"/>
+
+
+      <router-view></router-view> 
+      <v-btn v-on:click="usuarioAutenticado = !usuarioAutenticado" >Cambiar estado</v-btn>
+
+
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import MenuInicio from './components/navegacion/Menu'
+import MenuAdmin from './components/navegacion/MenuAdmin'
 
-#nav {
-  padding: 30px;
-}
+export default {
+  name: 'App',
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  components: {
+    MenuInicio,
+    MenuAdmin
+  },
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  data: () => ({
+    usuarioAutenticado: false
+  }),
+};
+</script>

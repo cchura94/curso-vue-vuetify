@@ -1,16 +1,17 @@
-# curso-vue-vuetify
+# Proyecto Curso Vue Vuetify
 
-## Project setup
+## Configuración de  Proyecto
+## Instalar las dependencias de Vue
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Levantar el Servidor
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compilar los archivos para producción
 ```
 npm run build
 ```
