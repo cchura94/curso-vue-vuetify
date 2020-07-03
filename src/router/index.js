@@ -4,6 +4,22 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
+  function authGuard(to, from, next) {
+    try{
+      var token = JSON.parse(atob(localStorage.getItem("token")))
+      if(token.access_token && token){
+        next();
+      }else{
+        next({name: "Login"})
+      } 
+
+    }catch(error){
+      localStorage.clear()
+      next({name: "Login"})
+    }
+    
+  }
+
   const routes = [
   {
     path: '/',
@@ -21,7 +37,9 @@ Vue.use(VueRouter)
   {
     path: '/publicacion',
     name: 'Publicacion',
-    component: () => import(/* webpackChunkName: "publicacion" */ '../views/Publicacion.vue')
+    component: () => import(/* webpackChunkName: "publicacion" */ '../views/Publicacion.vue'),
+    beforeEnter: authGuard
+  
   },
   {
     path: '/ingresar',
@@ -31,7 +49,9 @@ Vue.use(VueRouter)
   {
     path: '/admin',
     name: 'Admin',
-    component: () => import(/* webpackChunkName: "admin" */ '../views/admin/Admin.vue')
+    component: () => import(/* webpackChunkName: "admin" */ '../views/admin/Admin.vue'),
+    beforeEnter: authGuard
+    
   }
 ]
 
@@ -39,6 +59,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(from);
+  next();
 })
 
 export default router

@@ -16,6 +16,8 @@
 import MenuInicio from './components/navegacion/Menu'
 import MenuAdmin from './components/navegacion/MenuAdmin'
 
+import { verificarLogin } from './config.js'
+
 export default {
   name: 'App',
 
@@ -25,7 +27,7 @@ export default {
   },
 
   data: () => ({
-    usuarioAutenticado: false
+    usuarioAutenticado: verificarLogin()
   }),
 };
 </script>

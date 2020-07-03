@@ -30,6 +30,7 @@
                     name="login"
                     prepend-icon="mdi-account"
                     type="text"
+                    v-model="usuario.email"
                   ></v-text-field>
 
                   <v-text-field
@@ -38,12 +39,14 @@
                     name="password"
                     prepend-icon="mdi-lock"
                     type="password"
+                    v-model="usuario.password"
                   ></v-text-field>
                 </v-form>
+                {{ usuario }}
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">Ingresar</v-btn>
+                <v-btn color="primary" @click="ingresar()">Ingresar</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -54,7 +57,27 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+  data(){
+    return {
+      usuario: {
+        email: "",
+        password: ""
+      }
+    }
+  },
+  methods: {
+    ingresar(){
+      axios.post("http://edtics.herokuapp.com/api/auth/login", this.usuario)
+          .then((datos) => {
+            console.log(datos.data);
+            localStorage.setItem("token", btoa(JSON.stringify(datos.data)))
+            this.$router.push({name: "Admin"}) //redireccionar
+          })
+    }
+  }
 
 }
 </script>
