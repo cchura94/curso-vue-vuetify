@@ -1,11 +1,5 @@
 <template>
-  <div>
-    <h1>Admin</h1>
-
-    <router-view></router-view>
-
-  </div>
-    
+  <h1>Producto</h1>
 </template>
 
 <script>

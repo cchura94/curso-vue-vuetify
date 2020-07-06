@@ -11,7 +11,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn icon to="/admin" >
+    <v-btn icon to="/" >
       <v-icon>mdi-home</v-icon>
     </v-btn>
 

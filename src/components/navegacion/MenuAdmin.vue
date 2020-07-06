@@ -3,42 +3,28 @@
       <v-navigation-drawer
         v-model="drawer"
         app
+         clipped
         >
       <v-list dense>
-        <v-list-item link to="/admin">
+        <v-list-item v-for="(menu, index) in menus" :key="index" link :to="menu.url">
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon>{{menu.icono}}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>ADMINISTRADOR</v-list-item-title>
+            <v-list-item-title>{{ menu.nombre }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item >
-          <v-list-item-action link to="/admin/categoria">
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>CATEGORIA</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item >
-          <v-list-item-action link to="/admin/producto">
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>PRODUCTO</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+       
 
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar
       app      
-      color="primary"
+      color="dark"
       dark
+      clipped-left=""
     >
 
  <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -72,7 +58,12 @@ export default {
 
     data(){
         return {
-            drawer: null
+            drawer: null,
+            menus: [
+              {url: "/admin", nombre:"ADMINISTRADOR", icono: "mdi-home"},
+              {url: "/admin/categoria", nombre:"CATEGORIA", icono: "mdi-home"},
+              {url: "/admin/producto", nombre:"PRODUCTO", icono: "mdi-home"}
+            ]
         }
     }
 
